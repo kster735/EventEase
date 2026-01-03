@@ -1,0 +1,17 @@
+@page "/events/{id}/register"
+
+<p>
+    Register on Event @id
+</p>
+
+
+@code {
+    [Parameter]
+    public string? id { get; set; }
+
+
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
+}
