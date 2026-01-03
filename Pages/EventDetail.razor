@@ -1,0 +1,13 @@
+@page "/events/{id}"
+@inject HttpClient Http
+
+<p>
+    Event @id
+</p>
+
+
+
+@code {
+    [Parameter] public string? id { get; set; }
+
+}
