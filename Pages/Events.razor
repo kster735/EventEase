@@ -1,13 +1,12 @@
-﻿@page "/weather"
+﻿@page "/events"
 @inject HttpClient Http
 
-<PageTitle>Weather</PageTitle>
+<PageTitle>Events</PageTitle>
 
-<h1>Weather</h1>
+<h1>Events</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
 
-@if (forecasts == null)
+@if (events == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -23,13 +22,13 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @foreach (var e in events)
             {
                 <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
+                    <td>@e.Date.ToShortDateString()</td>
+                    <td>@e.TemperatureC</td>
+                    <td>@e.TemperatureF</td>
+                    <td>@e.Summary</td>
                 </tr>
             }
         </tbody>
@@ -37,11 +36,11 @@ else
 }
 
 @code {
-    private WeatherForecast[]? forecasts;
+    private WeatherForecast[]? events;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+        events = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
     }
 
     public class WeatherForecast
