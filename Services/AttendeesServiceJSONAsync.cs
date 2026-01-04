@@ -5,6 +5,11 @@ using EventEase.Models;
 // async crud operations for attendees
 public class AttendeesServiceJSONAsync : IAttendeeService
 {
+    private readonly HttpClient _http;
+    public AttendeesServiceJSONAsync(HttpClient http)
+    {
+        _http = http;
+    }
     public Task<Attendee> CreateAttendeeAsync(Attendee newAttendee)
     {
         throw new NotImplementedException();
