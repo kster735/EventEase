@@ -26,7 +26,7 @@
   protected override void OnParametersSet()
   {
     _imageUrl = string.IsNullOrEmpty(Event?.ImageUrl) ? "/img/eventDefault.png" : Event?.ImageUrl;
-    _imageAlt = string.IsNullOrEmpty(Event?.ImageAlt) ? "Default Event Image" : Event?.ImageAlt;
+    _imageAlt = string.IsNullOrEmpty(Event?.ImageUrl) ? "Default Event Image" : Event?.ImageAlt;
   }
 
 }
