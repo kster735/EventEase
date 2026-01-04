@@ -1,13 +1,39 @@
 namespace EventEase.Services;
 
+using System.Net.Http.Json;
 using EventEase.Models;
 
 // async crud operations for events
 public class EventsServiceJSONAsync : IEventService
 {
-    public Task<Event> CreateEventAsync(Event newEvent)
+    // This field holds the HttpClient instance used for making HTTP requests.
+    private readonly HttpClient _http;
+    // Automatic dependency resolution of HttpClient via constructor injection.
+    public EventsServiceJSONAsync(HttpClient http)
     {
-        throw new NotImplementedException();
+        _http = http;
+    }
+    public async Task<Event> CreateEventAsync(Event newEvent)
+    {
+        var events = await _http.GetFromJsonAsync<IEnumerable<Event>>("sample-data/events.json");
+
+        // Simulate adding the new event to the list
+        // In a real implementation, this would involve POSTing to a server endpoint
+        // and returning the newly created event with its assigned ID.
+        if (events == null || !events.Any() || events.Count() == 0)
+        {
+            newEvent.Id = 1; // First ID if no events exist
+            events = new List<Event> { newEvent };
+        }
+        else
+        {
+            newEvent.Id = events.Max(e => e.Id) + 1; // Assign next ID
+            events = events.Append(newEvent);
+        }
+
+        await _http.PostAsJsonAsync("sample-data/events.json", events);
+
+        return newEvent;
     }
 
     public Task<bool> DeleteEventAsync(int eventId)
@@ -15,9 +41,14 @@ public class EventsServiceJSONAsync : IEventService
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<Event>> GetAllEventsAsync()
+    public async Task<IEnumerable<Event>> GetAllEventsAsync()
     {
-        throw new NotImplementedException();
+        var events = await _http.GetFromJsonAsync<IEnumerable<Event>>("sample-data/events.json");
+        if (events == null)
+        {
+            return Enumerable.Empty<Event>(); // or just []
+        }
+        return events;
     }
 
     public Task<Event> GetEventByIdAsync(int eventId)
@@ -29,4 +60,5 @@ public class EventsServiceJSONAsync : IEventService
     {
         throw new NotImplementedException();
     }
+
 }
