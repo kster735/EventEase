@@ -2,6 +2,115 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+@* Please create a simple marketing page for EventEase an app where you can find events and register *@
 
-Welcome to your new app.
+@* Create sections like hero, features, testimonials and a footer *@
+@* Style them a little *@
+@* Add some basic styling to make the marketing page look nice *@
+@* I want the features to be cards with background colors *@
+
+
+<div class="marketing container-fluid mt-5">
+    <div class="jumbotron text-center bg-light p-5 rounded">
+        <h1 class="display-4">Welcome to EventEase!</h1>
+        <p class="lead">Discover and register for exciting events around you.</p>
+        <a class="btn btn-primary btn-lg" href="/events" role="button">Browse Events</a>
+    </div>
+
+    @* title for the features *@
+    <h2 class="text-center mt-5 mb-3">Features</h2>
+    <div class="row text-center my-5">
+        <div class="col-md-4">
+            <div class="card h-100 bg-info text-white p-3">
+                <div class="card-body">
+                    <h5 class="card-title">Discover Events</h5>
+                    <p class="card-text">Find events that match your interests and passions.</p>    
+                </div>
+            </div>  
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 bg-success text-white p-3">
+                <div class="card-body">
+                    <h5 class="card-title">Easy Registration</h5>
+                    <p class="card-text">Register for events with just a few clicks.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 bg-warning text-white p-3">
+                <div class="card-body">
+                    <h5 class="card-title">Stay Updated</h5>
+                    <p class="card-text">Get notifications about upcoming events and updates.</p>
+                </div>
+            </div>
+        </div>
+        @* add here testimonials and style them as quotes don't give the same style as cards they must be distinct from the features*@
+        @* title for testimonials *@
+    
+    <h2 class="text-center mt-5 mb-3">What Our Users Say</h2>
+        <div class="col-md-4">
+            <div class="testimonial p-4">
+                <blockquote class="blockquote">
+                    <p class="mb-0">"EventEase made it so easy to find and register for events I love!"</p>
+                    <footer class="blockquote-footer mt-2">- Alex J.</footer>
+                </blockquote>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="testimonial p-4">
+                <blockquote class="blockquote">
+                    <p class="mb-0">"A fantastic platform that keeps me informed about local events."</p>
+                    <footer class="blockquote-footer mt-2">- Maria S.</footer>
+                </blockquote>           
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="testimonial p-4">
+                <blockquote class="blockquote">
+                    <p class="mb-0">"I love how user-friendly EventEase is. Highly recommended!"</p>
+                    <footer class="blockquote       -footer mt-2">- John D.</footer>
+                </blockquote>   
+            </div>
+        </div>
+    </div>
+    <footer class="text-center py-4">
+        <p>&copy; 2024 EventEase. All rights reserved.</p>
+    </footer>
+</div>
+
+@* add a complex radial background gradients on the body of this page and make them blend together 
+  without leaving large empty spaces
+*@
+<style>
+
+    body {
+        background: 
+        radial-gradient(circle at 10% 20%, rgba(38, 100, 192, 0.8) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(199, 81, 15, 0.8) 0%, transparent 20%),
+        radial-gradient(circle at 50% 50%, rgba(255, 154, 158, 0.8) 0%, transparent 20%),
+        radial-gradient(circle at 30% 70%, rgba(161, 196, 253, 0.8) 0%, transparent 20%),
+        radial-gradient(circle at 70% 30%, rgba(247, 194, 235, 0.8) 0%, transparent 20%);
+        background-blend-mode: overlay; 
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .jumbotron {
+        background-color: transparent !important;
+        backdrop-filter: blur(25px);
+        border-radius: 10px;
+    }
+
+
+    .card {
+        border: none;
+        border-radius: 10px;
+    }
+
+    footer {
+        background-color: transparent;
+        backdrop-filter: blur(30px);
+        border-radius: 10px;
+    }
+</style>
