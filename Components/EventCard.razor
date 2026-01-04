@@ -2,21 +2,55 @@
 @using EventEase.Models
 @using Microsoft.AspNetCore.Components
 
-<div class="card mb-3" style="max-width: 540px;">
+<div class="card mb-3">
   <div class="row g-0">
-    <div class="col-md-4">
+    <div class="col-md-4 overflow-hidden">
       <img src="@_imageUrl" class="img-fluid rounded-start" alt="@_imageAlt">
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h5 class="card-title">@Event?.Name</h5>
-        <p class="card-text">@Event?.Description</p>
-        <p class="card-text"><small class="text-body-secondary">@Event?.Date.ToString("MM/dd/yyyy")</small></p>
-        <a href="/events/@Event?.Id" class="btn btn-primary">Go to Event</a>
+        <div class="">
+            <h5 class="card-title">@Event?.Name</h5>
+        </div>
+        <div class="card-text text-truncate">@Event?.Description</div>
+        <div class="card-text"><small class="text-body-secondary">@Event?.Date.ToString("MM/dd/yyyy")</small></div>
+        <div class="text-end">
+             <a href="/events/@Event?.Id" class="btn btn-outline-primary">Go to Event</a>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<style>
+  img.img-fluid {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.2s ease-out;
+  } 
+
+  div.card {
+    height: 100%;
+    overflow: hidden;
+    &>* {
+      height: 100%;
+    }
+    &:hover img {
+      transform: scale(1.05);
+    }
+  }
+
+  div.card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+  }
+
+
+</style
 
 @code {
   [Parameter] public Event? Event { get; set; }

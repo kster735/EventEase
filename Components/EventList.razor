@@ -3,15 +3,13 @@
 @using Microsoft.AspNetCore.Components
 @inject Services.IEventService EventService
 
-<div class="container-fluid">
-    <div class="row">
+<div class="">
+    <div class="list">
         @if (Events != null && Events.Any())
         {
             @foreach (Event e in Events)
             {
-                <div class="col-md-4 mb-4">
-                    <EventCard Event="e" />
-                </div>
+                <EventCard Event="e" />
             }
         }
         else
@@ -21,6 +19,15 @@
     </div>
 </div>
 
+<style> 
+    .list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-template-rows: auto;
+        gap: 1rem;
+    }
+
+</style>
 
 @code {
     [Parameter] public List<Event>? Events { get; set; }
