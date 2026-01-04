@@ -1,0 +1,49 @@
+@namespace EventEase.Components
+@using EventEase.Models
+@using Microsoft.AspNetCore.Components
+
+<div class="container-fluid">
+    <div class="row">
+        @if (Events != null && Events.Any())
+        {
+            @foreach (var ev in Events)
+            {
+                <div class="col-md-4 mb-4">
+                    <EventCard Event="ev" />
+                </div>
+            }
+        }
+        else
+        {
+            <p>No events available.</p>
+        }
+    </div>
+</div>
+
+
+@code {
+    [Parameter] public List<Event>? Events { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        Events = new List<Event>
+{
+new Event
+{
+Id = 1,
+Name = "Sample Event 1",
+Description = "This is a sample event.",
+Date = DateTime.Now.AddDays(10),
+ImageUrl = "", ImageAlt = ""
+},
+new Event {
+Id = 2,
+Name = "Sample Event 2",
+Description = "This is another sample event.",
+Date = DateTime.Now.AddDays(20),
+ImageUrl = "", ImageAlt = ""
+}
+};
+        return base.OnInitializedAsync();
+    }
+}

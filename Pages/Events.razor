@@ -1,9 +1,14 @@
 ﻿@page "/events"
+@using EventEase.Components
 @inject HttpClient Http
 
 <PageTitle>Events</PageTitle>
 
 <h1>Events</h1>
+
+<div>
+    <EventList />
+</div>
 
 
 @if (events == null)
