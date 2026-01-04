@@ -6,9 +6,6 @@
 
 <h1>Events</h1>
 
-<div>
-    <EventList />
-</div>
 
 
 @if (events == null)
@@ -17,45 +14,16 @@
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th aria-label="Temperature in Celsius">Temp. (C)</th>
-                <th aria-label="Temperature in Fahrenheit">Temp. (F)</th>
-                <th>Summary</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var e in events)
-            {
-                <tr>
-                    <td>@e.Date.ToShortDateString()</td>
-                    <td>@e.TemperatureC</td>
-                    <td>@e.TemperatureF</td>
-                    <td>@e.Summary</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <div>
+        <EventList Events="events" />
+    </div>
 }
 
 @code {
-    private WeatherForecast[]? events;
+    private List<EventEase.Models.Event>? events;
 
     protected override async Task OnInitializedAsync()
     {
-        events = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
-    }
-
-    public class WeatherForecast
-    {
-        public DateOnly Date { get; set; }
-
-        public int TemperatureC { get; set; }
-
-        public string? Summary { get; set; }
-
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+        events = await Http.GetFromJsonAsync<List<EventEase.Models.Event>>("sample-data/events.json");
     }
 }
