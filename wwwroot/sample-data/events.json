@@ -5,7 +5,7 @@
     "date": "2022-01-06",
     "Location": "New York",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "imageUrl": "https://example.com/images/tech-conference.jpg",
+    "imageUrl": "",
     "imageAlt": "Tech Conference Image",
     "attendees": []
   },
@@ -15,7 +15,7 @@
     "date": "2022-03-15",
     "Location": "Los Angeles",
     "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    "imageUrl": "https://example.com/images/music-festival.jpg",
+    "imageUrl": "",
     "imageAlt": "Music Festival Image",
     "attendees": []
   },
@@ -25,7 +25,7 @@
     "date": "2022-05-20",
     "Location": "Chicago",
     "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    "imageUrl": "https://example.com/images/art-exhibition.jpg",
+    "imageUrl": "",
     "imageAlt": "Art Exhibition Image",
     "attendees": []
   },
@@ -35,7 +35,7 @@
     "date": "2022-07-10",
     "Location": "San Francisco",
     "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "imageUrl": "https://example.com/images/food-carnival.jpg",
+    "imageUrl": "",
     "imageAlt": "Food Carnival Image",
     "attendees": []
   },
@@ -45,7 +45,7 @@
     "date": "2022-09-25",
     "Location": "Boston",
     "description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
-    "imageUrl": "https://example.com/images/marathon.jpg",
+    "imageUrl": "",
     "imageAlt": "Marathon Image", 
     "attendees": []
   },
@@ -55,7 +55,7 @@
     "date": "2022-11-05",
     "Location": "Miami",
     "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos.",
-    "imageUrl": "https://example.com/images/film-festival.jpg",
+    "imageUrl": "",
     "imageAlt": "Film Festival Image",
     "attendees": []
   }
