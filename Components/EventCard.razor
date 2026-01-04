@@ -1,0 +1,23 @@
+@namespace EventEase.Components
+@using EventEase.Models
+@using Microsoft.AspNetCore.Components
+
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="..." class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">@Event?.Name</h5>
+        <p class="card-text">@Event?.Description</p>
+        <p class="card-text"><small class="text-body-secondary">@Event?.Date.ToString("MM/dd/yyyy")</small></p>
+        <a href="/events/@Event?.Id" class="btn btn-primary">Go to Event</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+@code {
+  [Parameter] public Event? Event { get; set; }
+}
