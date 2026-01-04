@@ -5,7 +5,7 @@
 <div class="card mb-3" style="max-width: 540px;">
   <div class="row g-0">
     <div class="col-md-4">
-      <img src="..." class="img-fluid rounded-start" alt="...">
+      <img src="@_imageUrl" class="img-fluid rounded-start" alt="@_imageAlt">
     </div>
     <div class="col-md-8">
       <div class="card-body">
@@ -20,4 +20,13 @@
 
 @code {
   [Parameter] public Event? Event { get; set; }
+
+  private string? _imageUrl { get; set; }
+  private string? _imageAlt { get; set; }
+  protected override void OnParametersSet()
+  {
+    _imageUrl = string.IsNullOrEmpty(Event?.ImageUrl) ? "/img/eventDefault.png" : Event?.ImageUrl;
+    _imageAlt = string.IsNullOrEmpty(Event?.ImageAlt) ? "Default Event Image" : Event?.ImageAlt;
+  }
+
 }
