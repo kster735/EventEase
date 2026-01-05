@@ -13,6 +13,7 @@ public class EventsServiceJSONAsync : IEventService
     {
         _http = http;
     }
+    
     public async Task<Event> CreateEventAsync(Event newEvent)
     {
         var events = await _http.GetFromJsonAsync<IEnumerable<Event>>("sample-data/events.json");
@@ -51,9 +52,10 @@ public class EventsServiceJSONAsync : IEventService
         return events;
     }
 
-    public Task<Event> GetEventByIdAsync(int eventId)
+    public async Task<Event> GetEventByIdAsync(int eventId)
     {
-        throw new NotImplementedException();
+        var events = await _http.GetFromJsonAsync<IEnumerable<Event>>("sample-data/events.json");
+        return events?.FirstOrDefault(e => e.Id == eventId);
     }
 
     public Task<Event> UpdateEventAsync(Event updatedEvent)

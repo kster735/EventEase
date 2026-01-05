@@ -1,0 +1,63 @@
+﻿[
+  {
+    "id": 1,
+    "name":"Anual Tech Conference",
+    "date": "2022-01-06",
+    "Location": "New York",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "imageUrl": "https://images.unsplash.com/photo-1582192730841-2a682d7375f9?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "imageAlt": "Tech Conference Image",
+    "attendees": []
+  },
+  {
+    "id": 2,
+    "name":"Music Festival",
+    "date": "2022-03-15",
+    "Location": "Los Angeles",
+    "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "imageUrl": "https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "imageAlt": "Music Festival Image",
+    "attendees": []
+  },
+  {
+    "id": 3,
+    "name":"Art Exhibition",
+    "date": "2022-05-20",
+    "Location": "Chicago",
+    "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "imageUrl": "https://media.istockphoto.com/id/1131101048/photo/art-exibition-lot-3d-visualization.jpg?s=1024x1024&w=is&k=20&c=TjzXh0QfUksFWswnOsNgN9_6MFFGt7dBj771_HvG-jQ=",
+    "imageAlt": "Art Exhibition Image",
+    "attendees": []
+  },
+  {
+    "id": 4,
+    "name":"Food Carnival",
+    "date": "2022-07-10",
+    "Location": "San Francisco",
+    "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "imageUrl": "https://images.unsplash.com/photo-1604624483037-489d287ae9fd?q=80&w=1523&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "imageAlt": "Food Carnival Image",
+    "attendees": []
+  },
+  {
+    "id": 5,
+    "name":"Marathon",
+    "date": "2022-09-25",
+    "Location": "Boston",
+    "description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+    "imageUrl": "https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?q=80&w=1474&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "imageAlt": "Marathon Image", 
+    "attendees": []
+  },
+  {
+    "id": 6,
+    "name":"Film Festival",
+    "date": "2022-11-05",
+    "Location": "Miami",
+    "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos.",
+    "imageUrl": "https://images.unsplash.com/photo-1736766920028-ee18c15c02ac?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "imageAlt": "Film Festival Image",
+    "attendees": []
+  }
+]
+ 

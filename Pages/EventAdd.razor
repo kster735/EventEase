@@ -1,0 +1,51 @@
+@page "/events/add"
+@using Models
+@inject Services.IEventService EventService
+@inject NavigationManager Nav
+
+<h3>Add New Event</h3>
+
+<div class="container-sm mt-4">
+    <h4>Fill up event details</h4>
+    <EditForm Model="@EventModel" OnValidSubmit="HandleSave" class="my-3">
+        <!-- Form fields for event details would go here -->
+        <div class="mb-3">
+            <label for="eventName" class="form-label">Event Name</label>
+            <InputText type="text" class="form-control" id="eventName" @bind-Value="EventModel.Name" />
+        </div>
+        <div class="mb-3">
+            <label for="eventDate" class="form-label">Event Date</label>
+            <InputDate class="form-control" id="eventDate" @bind-value="EventModel.Date" />
+        </div>
+        <div class="mb-3">
+            <label for="eventLocation" class="form-label">Event Location</label>
+            <InputText type="text" class="form-control" id="eventLocation" @bind-value="EventModel.Location" />
+        </div>
+        <div class="mb-3">
+            <label for="eventDescription" class="form-label">Event Description</label>
+            <InputTextArea class="form-control" id="eventDescription" @bind-value="EventModel.Description" />
+        </div>
+        <div class="mb-3">
+            <label for="eventImageUrl" class="form-label">Event Image URL</label>
+            <InputText type="text" class="form-control" id="eventImageUrl" @bind-value="EventModel.ImageUrl" />
+        </div>
+        <div class="mb-3">
+            <label for="eventImageAlt" class="form-label">Event Image Alt Text</label>
+            <InputText type="text" class="form-control" id="eventImageAlt" @bind-value="EventModel.ImageAlt" />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </EditForm>
+</div>
+
+@code {
+    public Event EventModel { get; set; } = new Event { Date = DateTime.Today };
+
+    private async Task HandleSave()
+    {
+        // Logic to save the eventModel to a database or API would go here
+        await EventService.CreateEventAsync(EventModel);
+        // navigate to the events list page
+        Nav.NavigateTo("/events");
+    }
+
+}
