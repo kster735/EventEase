@@ -1,7 +1,6 @@
 @namespace EventEase.Components
 @using EventEase.Models
 @using Microsoft.AspNetCore.Components
-@inject Services.IEventService EventService
 
 <div class="">
     <div class="list">
@@ -19,14 +18,13 @@
     </div>
 </div>
 
-<style> 
+<style>
     .list {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         grid-template-rows: auto;
         gap: 1rem;
     }
-
 </style>
 
 @code {

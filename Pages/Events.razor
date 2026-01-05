@@ -1,6 +1,7 @@
 ﻿@page "/events"
 @using EventEase.Components
-@inject HttpClient Http
+@using EventEase.Models
+@inject Services.IEventService indexedDbService
 
 <PageTitle>Events</PageTitle>
 
@@ -24,8 +25,12 @@ else
 @code {
     private List<EventEase.Models.Event>? events;
 
+    [Inject]
+    private IJSRuntime JSInterop { get; set; } = default!;
+
     protected override async Task OnInitializedAsync()
     {
-        events = await Http.GetFromJsonAsync<List<EventEase.Models.Event>>("sample-data/events.json");
+        events = (await indexedDbService.GetAllEventsAsync()).ToList();
+        await JSInterop.InvokeVoidAsync("console.log", $"Loaded {events.Count} events from IndexedDB.");
     }
 }
