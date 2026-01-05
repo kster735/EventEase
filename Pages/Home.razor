@@ -14,7 +14,8 @@
     <div class="jumbotron text-center bg-light p-5 rounded">
         <h1 class="display-4">Welcome to EventEase!</h1>
         <p class="lead">Discover and register for exciting events around you.</p>
-        <a class="btn btn-primary btn-lg" href="/events" role="button">Browse Events</a>
+        <NavLink class="btn btn-primary btn-lg" href="events" Match="NavLinkMatch.All" role="button">Browse Events
+        </NavLink>
     </div>
 
     @* title for the features *@
@@ -24,9 +25,9 @@
             <div class="card h-100 bg-info text-white p-3">
                 <div class="card-body">
                     <h5 class="card-title">Discover Events</h5>
-                    <p class="card-text">Find events that match your interests and passions.</p>    
+                    <p class="card-text">Find events that match your interests and passions.</p>
                 </div>
-            </div>  
+            </div>
         </div>
         <div class="col-md-4">
             <div class="card h-100 bg-success text-white p-3">
@@ -46,8 +47,8 @@
         </div>
         @* add here testimonials and style them as quotes don't give the same style as cards they must be distinct from the features*@
         @* title for testimonials *@
-    
-    <h2 class="text-center mt-5 mb-3">What Our Users Say</h2>
+
+        <h2 class="text-center mt-5 mb-3">What Our Users Say</h2>
         <div class="col-md-4">
             <div class="testimonial p-4">
                 <blockquote class="blockquote">
@@ -61,7 +62,7 @@
                 <blockquote class="blockquote">
                     <p class="mb-0 fst-italic">"A fantastic platform that keeps me informed about local events."</p>
                     <footer class="blockquote-footer mt-2">- Maria S.</footer>
-                </blockquote>           
+                </blockquote>
             </div>
         </div>
         <div class="col-md-4">
@@ -69,7 +70,7 @@
                 <blockquote class="blockquote">
                     <p class="mb-0 fst-italic">"I love how user-friendly EventEase is. Highly recommended!"</p>
                     <footer class="blockquote-footer mt-2">- John D.</footer>
-                </blockquote>   
+                </blockquote>
             </div>
         </div>
     </div>
@@ -82,15 +83,14 @@
   without leaving large empty spaces
 *@
 <style>
-
     body {
-        background: 
-        radial-gradient(circle at 10% 20%, rgba(38, 100, 192, 0.25) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(199, 81, 15, 0.25) 0%, transparent 40%),
-        radial-gradient(circle at 50% 50%, rgba(255, 154, 158, 0.25) 0%, transparent 40%),
-        radial-gradient(circle at 30% 70%, rgba(161, 196, 253, 0.25) 0%, transparent 40%),
-        radial-gradient(circle at 70% 30%, rgba(247, 194, 235, 0.25) 0%, transparent 40%);
-        background-blend-mode: overlay; 
+        background:
+            radial-gradient(circle at 10% 20%, rgba(38, 100, 192, 0.25) 0%, transparent 40%),
+            radial-gradient(circle at 90% 80%, rgba(199, 81, 15, 0.25) 0%, transparent 40%),
+            radial-gradient(circle at 50% 50%, rgba(255, 154, 158, 0.25) 0%, transparent 40%),
+            radial-gradient(circle at 30% 70%, rgba(161, 196, 253, 0.25) 0%, transparent 40%),
+            radial-gradient(circle at 70% 30%, rgba(247, 194, 235, 0.25) 0%, transparent 40%);
+        background-blend-mode: overlay;
         min-height: 100vh;
         display: flex;
         flex-direction: column;
