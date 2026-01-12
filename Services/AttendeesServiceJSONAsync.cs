@@ -10,7 +10,7 @@ public class AttendeesServiceJSONAsync : IAttendeeService
     {
         _http = http;
     }
-    public Task<Attendee> CreateAttendeeAsync(Attendee newAttendee)
+    public Task<AttendeeModel> CreateAttendeeAsync(AttendeeModel newAttendee)
     {
         throw new NotImplementedException();
     }
@@ -20,17 +20,17 @@ public class AttendeesServiceJSONAsync : IAttendeeService
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<Attendee>> GetAllAttendeesAsync()
+    public Task<IEnumerable<AttendeeModel>> GetAllAttendeesAsync()
     {
         throw new NotImplementedException();
     }
 
-    public Task<Attendee> GetAttendeeByIdAsync(int attendeeId)
+    public Task<AttendeeModel> GetAttendeeByIdAsync(int attendeeId)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Attendee> UpdateAttendeeAsync(Attendee updatedAttendee)
+    public Task<AttendeeModel> UpdateAttendeeAsync(AttendeeModel updatedAttendee)
     {
         throw new NotImplementedException();
     }

@@ -10,12 +10,13 @@
     <div class="col-md-8">
       <div class="card-body">
         <div class="">
-            <h5 class="card-title">@Event?.Name</h5>
+          <h5 class="card-title">@Event?.Name</h5>
         </div>
         <div class="card-text text-truncate">@Event?.Description</div>
         <div class="card-text"><small class="text-body-secondary">@Event?.Date.ToString("MM/dd/yyyy")</small></div>
         <div class="text-end">
-             <a href="/events/@Event?.Id" class="btn btn-outline-primary">Go to Event</a>
+          <NavLink href="@($"events/{Event?.Id}")" class="btn btn-outline-primary" Match="NavLinkMatch.All">Go to Event
+          </NavLink>
         </div>
       </div>
     </div>
@@ -28,14 +29,16 @@
     height: 100%;
     object-fit: cover;
     transition: transform 0.2s ease-out;
-  } 
+  }
 
   div.card {
     height: 100%;
     overflow: hidden;
+
     &>* {
       height: 100%;
     }
+
     &:hover img {
       transform: scale(1.05);
     }
@@ -50,17 +53,47 @@
   }
 
 
-</style
-
-@code {
-  [Parameter] public Event? Event { get; set; }
-
-  private string? _imageUrl { get; set; }
-  private string? _imageAlt { get; set; }
-  protected override void OnParametersSet()
+  </style
+@code
   {
-    _imageUrl = string.IsNullOrEmpty(Event?.ImageUrl) ? "/img/eventDefault.jpg" : Event?.ImageUrl;
-    _imageAlt = string.IsNullOrEmpty(Event?.ImageUrl) ? "Default Event Image" : Event?.ImageAlt;
+  [Parameter]
+  public
+  Event?
+  Event
+  {
+    get;
+    set;
   }
-
+  private
+  string?
+  _imageUrl
+  {
+    get;
+    set;
+  }
+  private
+  string?
+  _imageAlt
+  {
+    get;
+    set;
+  }
+  protected
+  override
+  void
+  OnParametersSet()
+  {
+    _imageUrl
+    =
+    string.IsNullOrEmpty(Event?.ImageUrl)
+    ?
+    "/img/eventDefault.jpg" :
+    Event?.ImageUrl;
+    _imageAlt
+    =
+    string.IsNullOrEmpty(Event?.ImageUrl)
+    ?
+    "Default Event Image" :
+    Event?.ImageAlt;
+  }
 }

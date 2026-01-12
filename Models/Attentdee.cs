@@ -1,6 +1,6 @@
 namespace EventEase.Models;
 
-public class Attendee
+public class AttendeeModel
 {
     public int Id { get; set; }
     public string? Name { get; set; }

@@ -6,9 +6,9 @@ using EventEase.Models;
 
 public interface IAttendeeService
 {
-    Task<Attendee> CreateAttendeeAsync(Attendee newAttendee);
-    Task<Attendee> GetAttendeeByIdAsync(int attendeeId);
-    Task<IEnumerable<Attendee>> GetAllAttendeesAsync();
-    Task<Attendee> UpdateAttendeeAsync(Attendee updatedAttendee);
+    Task<AttendeeModel> CreateAttendeeAsync(AttendeeModel newAttendee);
+    Task<AttendeeModel> GetAttendeeByIdAsync(int attendeeId);
+    Task<IEnumerable<AttendeeModel>> GetAllAttendeesAsync();
+    Task<AttendeeModel> UpdateAttendeeAsync(AttendeeModel updatedAttendee);
     Task<bool> DeleteAttendeeAsync(int attendeeId);
 }

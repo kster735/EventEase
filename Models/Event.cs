@@ -9,5 +9,5 @@ public class Event
     public string? Description { get; set; }
     public string? ImageUrl { get; set; }
     public string? ImageAlt { get; set; }
-    public List<Attendee> Attendees { get; set; } = new List<Attendee>();
+    public List<AttendeeModel> Attendees { get; set; } = new List<AttendeeModel>();
 }

@@ -1,49 +1,50 @@
 namespace EventEase.Services;
 
 using EventEase.Models;
-using Microsoft.JSInterop;
+using TG.Blazor.IndexedDB;
 
 // async crud operations for events using IndexedDB via JSInterop
 public class AttendeesServiceIndexedDB : IAttendeeService
 {
-    private readonly IJSRuntime _jsRuntime;
+    private readonly IndexedDBManager _db;
 
-    public AttendeesServiceIndexedDB(IJSRuntime jsRuntime)
+    public AttendeesServiceIndexedDB(IndexedDBManager db)
     {
-        _jsRuntime = jsRuntime;
+        _db = db;
     }
 
-    public async Task<Attendee> CreateAttendeeAsync(Attendee newAttendee)
+    public async Task<AttendeeModel> CreateAttendeeAsync(AttendeeModel newAttendee)
     {
-        var attendeeId = await _jsRuntime.InvokeAsync<int>("indexedDBFunctions.addAttendee", newAttendee);
-        newAttendee.Id = attendeeId;
+        var storedAttendee = new StoreRecord<AttendeeModel>
+        {
+            Storename = "attendees",
+            Data = newAttendee,
+        };
+        await _db.AddRecord(storedAttendee);
         return newAttendee;
     }
 
     public async Task<bool> DeleteAttendeeAsync(int attendeeId)
     {
-        await _jsRuntime.InvokeVoidAsync("indexedDBFunctions.deleteAttendee", attendeeId);
-        return true;
+        throw new NotImplementedException();
     }
 
-    public async Task<IEnumerable<Attendee>> GetAllAttendeesAsync()
-    {
-        var attendees = await _jsRuntime.InvokeAsync<IEnumerable<Attendee>>("indexedDBFunctions.getAllAttendees");
-        return attendees ?? Enumerable.Empty<Attendee>();
-    }
-
-    public async Task<Attendee> GetAttendeeByIdAsync(int attendeeId)
-    {
-        var attendee = await _jsRuntime.InvokeAsync<Attendee>("indexedDBFunctions.getAttendeeById", attendeeId);
-        return attendee;
-    }
-
-    public Task<Attendee> UpdateAttendeeAsync(Attendee updatedAttendee)
+    public async Task<IEnumerable<AttendeeModel>> GetAllAttendeesAsync()
     {
         throw new NotImplementedException();
     }
 
-    public Task<Attendee> UpdateEventAsync(Attendee updatedEvent)
+    public async Task<AttendeeModel> GetAttendeeByIdAsync(int attendeeId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<AttendeeModel> UpdateAttendeeAsync(AttendeeModel updatedAttendee)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<AttendeeModel> UpdateEventAsync(AttendeeModel updatedEvent)
     {
         throw new NotImplementedException();
     }

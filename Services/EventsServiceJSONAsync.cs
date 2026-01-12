@@ -13,7 +13,7 @@ public class EventsServiceJSONAsync : IEventService
     {
         _http = http;
     }
-    
+
     public async Task<Event> CreateEventAsync(Event newEvent)
     {
         var events = await _http.GetFromJsonAsync<IEnumerable<Event>>("sample-data/events.json");

@@ -1,0 +1,51 @@
+@page "/events/{Id:int}/register"
+@using Models
+@using Microsoft.AspNetCore.Components.Forms
+
+@inject Services.IAttendeeService attendeeService
+@inject Services.IEventService eventService
+
+@inject NavigationManager Nav
+
+
+<h3>Add New Event</h3>
+
+<div class="container-sm mt-4">
+    <h4>Fill up event details</h4>
+    <EditForm Model="@Attendee" OnValidSubmit="HandleSave" class="my-3">
+        <!-- Form fields for event details would go here -->
+        <div class="mb-3">
+            <label for="attendeeName" class="form-label">Name</label>
+            <InputText type="text" class="form-control" id="attendeeName" @bind-Value="Attendee.Name" />
+        </div>
+        <div class="mb-3">
+            <label for="attendeeEmail" class="form-label">Email</label>
+            <InputText type="email" class="form-control" id="attendeeEmail" @bind-Value="Attendee.Email" />
+        </div>
+        <div class="mb-3">
+            <label for="eventId" class="form-label">Event</label>
+            <input type="hidden" class="form-control" id="eventId" @bind="Attendee.EventId" />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </EditForm>
+</div>
+
+@code {
+    [Parameter] public int Id { get; set; }
+    public AttendeeModel Attendee { get; set; } = new AttendeeModel();
+
+    protected override Task OnInitializedAsync()
+    {
+        Attendee.EventId = Id;
+        return base.OnInitializedAsync();
+    }
+
+    private async Task HandleSave()
+    {
+        // Logic to save the eventModel to a database or API would go here
+        await attendeeService.CreateAttendeeAsync(Attendee);
+        // navigate to the events list page
+        Nav.NavigateTo("events/" + Id);
+    }
+
+}
