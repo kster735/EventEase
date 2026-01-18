@@ -23,7 +23,6 @@
             <InputText type="email" class="form-control" id="attendeeEmail" @bind-Value="Attendee.Email" />
         </div>
         <div class="mb-3">
-            <label for="eventId" class="form-label">Event</label>
             <input type="hidden" class="form-control" id="eventId" @bind="Attendee.EventId" />
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -45,7 +44,7 @@
         // Logic to save the eventModel to a database or API would go here
         await attendeeService.CreateAttendeeAsync(Attendee);
         // navigate to the events list page
-        Nav.NavigateTo("events/" + Id);
+        Nav.NavigateTo($"{Nav.BaseUri}events/" + Id);
     }
 
 }
