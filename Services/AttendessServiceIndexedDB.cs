@@ -34,6 +34,21 @@ public class AttendeesServiceIndexedDB : IAttendeeService
         throw new NotImplementedException();
     }
 
+    public async Task<List<AttendeeModel>> GetAttendeesByEventIdAsync(int eventId)
+    {
+        var indexSearch = new StoreIndexQuery<int>
+        {
+            Storename = "attendees",
+            IndexName = "event_id",
+            QueryValue = eventId
+        };
+
+        var result = await _db.GetRecordByIndex<int, AttendeeModel>(indexSearch);
+
+
+        return new List<AttendeeModel> { result };
+    }
+
     public async Task<AttendeeModel> GetAttendeeByIdAsync(int attendeeId)
     {
         throw new NotImplementedException();

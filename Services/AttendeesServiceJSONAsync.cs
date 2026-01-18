@@ -25,6 +25,11 @@ public class AttendeesServiceJSONAsync : IAttendeeService
         throw new NotImplementedException();
     }
 
+    public Task<List<AttendeeModel>> GetAttendeesByEventIdAsync(int eventId)
+    {
+        throw new NotImplementedException();
+    }
+
     public Task<AttendeeModel> GetAttendeeByIdAsync(int attendeeId)
     {
         throw new NotImplementedException();

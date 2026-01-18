@@ -1,0 +1,45 @@
+@page "/events/{Id:int}/attendees"
+@using EventEase.Models
+@using EventEase.Services
+
+@inject IAttendeeService attendeeService;
+
+<p>
+    Attendees of @Id event.
+</p>
+
+<p>
+    @attendees.Count
+</p>
+
+@if (attendees != null)
+{
+    <ul>
+        @foreach (var a in attendees)
+        {
+            <li>
+                @a.Name
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>
+        No Attendees.
+    </p>
+}
+
+
+@code {
+    [Parameter] public int Id { get; set; }
+
+    List<AttendeeModel> attendees = new();
+    protected override async Task OnInitializedAsync()
+    {
+        var attendees = await attendeeService.GetAttendeesByEventIdAsync(Id);
+
+        @* return base.OnInitializedAsync(); *@
+    }
+
+}
