@@ -13,7 +13,6 @@
 
 @if (events == null)
 {
-    @* <p><em>Loading...</em></p> *@
     <div class="d-flex justify-content-center align-items-center" style="height: 50vh;">
         <div class="spinner-border" role="status"
             style="width: 5rem; height: 5rem; border-width: 0.5rem; border-color: #0d6efd; border-right-color: transparent;">
@@ -36,7 +35,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        await Task.Delay(1000); // Simulate loading delay
         events = (await indexedDbService.GetAllEventsAsync()).ToList();
         await JSInterop.InvokeVoidAsync("console.log", $"Loaded {events.Count} events from IndexedDB.");
     }
