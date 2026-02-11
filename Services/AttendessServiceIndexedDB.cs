@@ -31,22 +31,16 @@ public class AttendeesServiceIndexedDB : IAttendeeService
 
     public async Task<IEnumerable<AttendeeModel>> GetAllAttendeesAsync()
     {
-        throw new NotImplementedException();
+        var attendees = await _db.GetRecords<AttendeeModel>("attendees");
+        return attendees;
     }
 
     public async Task<List<AttendeeModel>> GetAttendeesByEventIdAsync(int eventId)
     {
-        var indexSearch = new StoreIndexQuery<int>
-        {
-            Storename = "attendees",
-            IndexName = "event_id",
-            QueryValue = eventId
-        };
+        var allAttendees = await _db.GetRecords<AttendeeModel>("attendees");
+        var result = allAttendees.Where(a => a.EventId == eventId);
 
-        var result = await _db.GetRecordByIndex<int, AttendeeModel>(indexSearch);
-
-
-        return new List<AttendeeModel> { result };
+        return await result.ToAsyncEnumerable().ToListAsync();
     }
 
     public async Task<AttendeeModel> GetAttendeeByIdAsync(int attendeeId)
