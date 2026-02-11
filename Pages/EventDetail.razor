@@ -16,7 +16,6 @@ else if (eventItem is null)
         <p>Event not found.</p>
         <button class="btn btn-secondary" @onclick="GoBack">Back</button>
     </div>
-    <NavLink class="btn btn-dark" href="">Attendees</NavLink>
 }
 else
 {
@@ -42,6 +41,11 @@ else
     <button class="btn btn-secondary ms-2" @onclick="GoBack">
         Back
     </button>
+
+    <NavLink class="btn btn-dark" href=@{
+    String.Format("events/{0}/attendees", Id)
+        }
+>Attendees</NavLink>
 </div>
 }
 
