@@ -2,26 +2,39 @@
 @using EventEase.Models
 @using EventEase.Services
 
+@inject EventStateContainer State;
 @inject IAttendeeService attendeeService;
+@inject NavigationManager Nav;
 
-<p>
-    Attendees of @Id event.
-</p>
 
-<p>
-    @attendees.Count
-</p>
+
+<h2>
+    Attendees of @(State.CurrentEvent?.Name ?? "No name") 
+</h2>
 
 @if (attendees != null)
 {
-    <ul>
-        @foreach (var a in attendees)
+    <table class="table table-striped overflow-x-scroll">
+        <thead>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+        </thead>
+        <tbody>
+        @for ( int i=0; i < attendees.Count; i++ )
         {
-            <li>
-                @a.Name
-            </li>
+            <tr class="">
+                    <td>@(i+1)</td>
+                    <td class="">
+                        @attendees[i].Name
+                    </td>
+                    <td class="">
+                        @attendees[i].Email
+                    </td>
+            </tr>
         }
-    </ul>
+        </tbody>
+    </table>
 }
 else
 {
@@ -30,16 +43,32 @@ else
     </p>
 }
 
+<button class="btn btn-dark ms-2" @onclick="GoBack">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+    </svg>
+    <span>
+        Back
+    </span>
+</button>
+
 
 @code {
     [Parameter] public int Id { get; set; }
+    [Parameter] public string? EventName {get; set;}
+
+    private int index = 1;
 
     List<AttendeeModel> attendees = new();
     protected override async Task OnInitializedAsync()
     {
         attendees = await attendeeService.GetAttendeesByEventIdAsync(Id);
+    }
 
-        @* return base.OnInitializedAsync(); *@
+
+    private void GoBack()
+    {
+        Nav.NavigateTo($"{Nav.BaseUri}events/{Id}");
     }
 
 }

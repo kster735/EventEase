@@ -1,8 +1,10 @@
 @page "/events/{Id:int}"
 
 @using Models
+
 @inject Services.IEventService EventService
 @inject NavigationManager Nav
+@inject EventStateContainer State
 
 <h3>Event Details</h3>
 
@@ -73,6 +75,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         eventItem = await EventService.GetEventByIdAsync(Id);
+        State.CurrentEvent = eventItem;
         isLoading = false;
     }
 
