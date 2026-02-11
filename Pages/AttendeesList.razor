@@ -37,7 +37,7 @@ else
     List<AttendeeModel> attendees = new();
     protected override async Task OnInitializedAsync()
     {
-        var attendees = await attendeeService.GetAttendeesByEventIdAsync(Id);
+        attendees = await attendeeService.GetAttendeesByEventIdAsync(Id);
 
         @* return base.OnInitializedAsync(); *@
     }
