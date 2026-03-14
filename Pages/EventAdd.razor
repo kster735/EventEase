@@ -9,29 +9,37 @@
     <h4>Fill up event details</h4>
     <EditForm Model="@EventModel" OnValidSubmit="HandleSave" class="my-3">
         <!-- Form fields for event details would go here -->
+        <DataAnnotationsValidator/>
+        <ValidationSummary class="alert alert-danger list-unstyled" role="alert"/>
         <div class="mb-3">
             <label for="eventName" class="form-label">Event Name</label>
             <InputText type="text" class="form-control" id="eventName" @bind-Value="EventModel.Name" />
+            <ValidationMessage For="()=>EventModel.Name"/>
         </div>
         <div class="mb-3">
             <label for="eventDate" class="form-label">Event Date</label>
             <InputDate class="form-control" id="eventDate" @bind-value="EventModel.Date" />
+            <ValidationMessage For="()=>EventModel.Date"/>
         </div>
         <div class="mb-3">
             <label for="eventLocation" class="form-label">Event Location</label>
             <InputText type="text" class="form-control" id="eventLocation" @bind-value="EventModel.Location" />
+            <ValidationMessage For="()=>EventModel.Location"/>
         </div>
         <div class="mb-3">
             <label for="eventDescription" class="form-label">Event Description</label>
             <InputTextArea class="form-control" id="eventDescription" @bind-value="EventModel.Description" />
+            <ValidationMessage For="()=>EventModel.Description"/>
         </div>
         <div class="mb-3">
             <label for="eventImageUrl" class="form-label">Event Image URL</label>
             <InputText type="text" class="form-control" id="eventImageUrl" @bind-value="EventModel.ImageUrl" />
+            <ValidationMessage For="()=>EventModel.ImageUrl"/>
         </div>
         <div class="mb-3">
             <label for="eventImageAlt" class="form-label">Event Image Alt Text</label>
             <InputText type="text" class="form-control" id="eventImageAlt" @bind-value="EventModel.ImageAlt" />
+            <ValidationMessage For="()=>EventModel.ImageAlt"/>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </EditForm>
@@ -47,5 +55,4 @@
         // navigate to the events list page
         Nav.NavigateTo("events");
     }
-
 }
