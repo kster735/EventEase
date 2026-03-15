@@ -14,13 +14,17 @@
     <h4>Fill up event details</h4>
     <EditForm Model="@Attendee" OnValidSubmit="HandleSave" class="my-3">
         <!-- Form fields for event details would go here -->
+        <DataAnnotationsValidator/>
+        <ValidationSummary class="alert alert-danger list-unstyled"/>
         <div class="mb-3">
             <label for="attendeeName" class="form-label">Name</label>
             <InputText type="text" class="form-control" id="attendeeName" @bind-Value="Attendee.Name" />
+            <ValidationMessage For="()=>Attendee.Name"/>
         </div>
         <div class="mb-3">
             <label for="attendeeEmail" class="form-label">Email</label>
             <InputText type="email" class="form-control" id="attendeeEmail" @bind-Value="Attendee.Email" />
+            <ValidationMessage For="()=>Attendee.Email"/>
         </div>
         <div class="mb-3">
             <input type="hidden" class="form-control" id="eventId" @bind="Attendee.EventId" />
