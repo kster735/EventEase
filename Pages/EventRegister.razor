@@ -1,46 +1,73 @@
 @page "/events/{Id:int}/register"
 @using Models
 @using Microsoft.AspNetCore.Components.Forms
-
 @inject Services.IAttendeeService attendeeService
-@inject Services.IEventService eventService
-
 @inject NavigationManager Nav
+@inject EventStateContainer State
 
+@if (State.CurrentEvent == null) {
+    @inject Services.IEventService eventService
+}
 
-<h3>Add New Event</h3>
-
-<div class="container-sm mt-4">
-    <h4>Fill up event details</h4>
-    <EditForm Model="@Attendee" OnValidSubmit="HandleSave" class="my-3">
+<h3>Register to @(State.CurrentEvent?.Name)</h3>
+<div class="mt-4 container-sm" style="max-width: 648px">
+    <h4>Fill up attendee details</h4>
+    <EditForm
+        Model="@Attendee"
+        OnValidSubmit="HandleSave"
+        class="my-3 row">
         <!-- Form fields for event details would go here -->
-        <DataAnnotationsValidator/>
-        <ValidationSummary class="alert alert-danger list-unstyled"/>
-        <div class="mb-3">
-            <label for="attendeeName" class="form-label">Name</label>
-            <InputText type="text" class="form-control" id="attendeeName" @bind-Value="Attendee.Name" />
-            <ValidationMessage For="()=>Attendee.Name"/>
+        <DataAnnotationsValidator />
+        <ValidationSummary class="alert alert-danger list-unstyled" />
+        <div class="mb-3 col-md-6">
+            <label for="attendeeName" class="form-label">
+                Name
+            </label>
+            <InputText
+                type="text"
+                class="form-control"
+                id="attendeeName"
+                @bind-Value="Attendee.Name" />
+            <ValidationMessage For="()=>Attendee.Name" />
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="attendeeEmail" class="form-label">
+                Email
+            </label>
+            <InputText
+                type="email"
+                class="form-control"
+                id="attendeeEmail"
+                @bind-Value="Attendee.Email" />
+            <ValidationMessage For="()=>Attendee.Email" />
         </div>
         <div class="mb-3">
-            <label for="attendeeEmail" class="form-label">Email</label>
-            <InputText type="email" class="form-control" id="attendeeEmail" @bind-Value="Attendee.Email" />
-            <ValidationMessage For="()=>Attendee.Email"/>
+            <input
+                type="hidden"
+                class="form-control"
+                id="eventId"
+                @bind="Attendee.EventId" />
         </div>
-        <div class="mb-3">
-            <input type="hidden" class="form-control" id="eventId" @bind="Attendee.EventId" />
+        <div>
+            <button type="submit" class="btn btn-primary">
+                Submit
+            </button>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
     </EditForm>
 </div>
 
-@code {
+@code
+{
     [Parameter] public int Id { get; set; }
+
     public AttendeeModel Attendee { get; set; } = new AttendeeModel();
 
-    protected override Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
         Attendee.EventId = Id;
-        return base.OnInitializedAsync();
+        if (State.CurrentEvent == null || State.CurrentEvent.Id != Id) {
+            State.CurrentEvent = await eventService.GetEventByIdAsync(Id);
+        }
     }
 
     private async Task HandleSave()
@@ -50,5 +77,4 @@
         // navigate to the events list page
         Nav.NavigateTo($"{Nav.BaseUri}events/" + Id);
     }
-
 }

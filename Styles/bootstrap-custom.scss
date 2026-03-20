@@ -1,0 +1,37 @@
+// 1. Override variables BEFORE importing Bootstrap
+$primary: #cd3079;
+$secondary: #f28232;
+$info: #02a2e2;
+$success: #34bd2b;
+$warning: #fec93e;
+$danger: #fb1653;
+$light: #e0e0d2;
+$white: #ffffff;
+$dark: #1f2d17;
+
+$border-radius: 1rem;
+$font-size-base: 1.05rem;
+
+// 2. Import Bootstrap's required layers in the correct order
+@import "../wwwroot/lib/bootstrap/scss/functions";
+@import "../wwwroot/lib/bootstrap/scss/variables";
+@import "../wwwroot/lib/bootstrap/scss/maps";
+
+// 3. Rebuild theme colors AFTER variables are loaded
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark,
+  "white":      $white
+);
+
+// 4. Import the rest of Bootstrap
+@import "../wwwroot/lib/bootstrap/scss/bootstrap";
+
+// 5. Your own overrides
+@import "overrides";

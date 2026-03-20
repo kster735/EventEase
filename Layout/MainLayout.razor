@@ -1,16 +1,19 @@
-﻿@inherits LayoutComponentBase
-<div class="page">
+﻿@using EventEase.Components
+@inherits LayoutComponentBase
+<div class="page bg-body">
     <div class="sidebar">
         <NavMenu />
     </div>
-
     <main>
         <div class="top-row px-4">
-            <NavLink href="about" match="NavLinkMatch.All">About</NavLink>
+            <NavLink href="about" match="NavLinkMatch.All">
+                About
+            </NavLink>
         </div>
-
-        <article class="content px-4">
+        <div class="window bg-body-secondary">
+            <article class="content px-4">
             @Body
-        </article>
+            </article>
+        </div>
     </main>
 </div>
