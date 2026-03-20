@@ -2,50 +2,90 @@
 @using Models
 @inject Services.IEventService EventService
 @inject NavigationManager Nav
-
 <h3>Add New Event</h3>
-
 <div class="container-sm mt-4">
     <h4>Fill up event details</h4>
-    <EditForm Model="@EventModel" OnValidSubmit="HandleSave" class="my-3">
+    <EditForm
+        Model="@EventModel"
+        OnValidSubmit="HandleSave"
+        class="my-3 row">
         <!-- Form fields for event details would go here -->
-        <DataAnnotationsValidator/>
-        <ValidationSummary class="alert alert-danger list-unstyled" role="alert"/>
-        <div class="mb-3">
-            <label for="eventName" class="form-label">Event Name</label>
-            <InputText type="text" class="form-control" id="eventName" @bind-Value="EventModel.Name" />
-            <ValidationMessage For="()=>EventModel.Name"/>
+        <DataAnnotationsValidator />
+        <ValidationSummary class="alert alert-danger list-unstyled" role="alert" />
+        <div class="mb-3 col-md-6">
+            <label for="eventName" class="form-label">
+                Event Name
+            </label>
+            <InputText
+                type="text"
+                class="form-control"
+                id="eventName"
+                @bind-Value="EventModel.Name" />
+            <ValidationMessage For="()=>EventModel.Name" />
         </div>
-        <div class="mb-3">
-            <label for="eventDate" class="form-label">Event Date</label>
-            <InputDate class="form-control" id="eventDate" @bind-value="EventModel.Date" />
-            <ValidationMessage For="()=>EventModel.Date"/>
+        <div class="mb-3 col-md-6">
+            <label for="eventDate" class="form-label">
+                Event Date
+            </label>
+            <InputDate
+                class="form-control"
+                id="eventDate"
+                @bind-value="EventModel.Date" />
+            <ValidationMessage For="()=>EventModel.Date" />
         </div>
-        <div class="mb-3">
-            <label for="eventLocation" class="form-label">Event Location</label>
-            <InputText type="text" class="form-control" id="eventLocation" @bind-value="EventModel.Location" />
-            <ValidationMessage For="()=>EventModel.Location"/>
+        <div class="mb-3 col-md-4">
+            <label for="eventLocation" class="form-label">
+                Event Location
+            </label>
+            <InputText
+                type="text"
+                class="form-control"
+                id="eventLocation"
+                @bind-value="EventModel.Location" />
+            <ValidationMessage For="()=>EventModel.Location" />
         </div>
-        <div class="mb-3">
-            <label for="eventDescription" class="form-label">Event Description</label>
-            <InputTextArea class="form-control" id="eventDescription" @bind-value="EventModel.Description" />
-            <ValidationMessage For="()=>EventModel.Description"/>
+        <div class="mb-3 col-md-8">
+            <label for="eventDescription" class="form-label">
+                Event Description
+            </label>
+            <InputTextArea
+                class="form-control"
+                id="eventDescription"
+                @bind-value="EventModel.Description" />
+            <ValidationMessage For="()=>EventModel.Description" />
         </div>
-        <div class="mb-3">
-            <label for="eventImageUrl" class="form-label">Event Image URL</label>
-            <InputText type="text" class="form-control" id="eventImageUrl" @bind-value="EventModel.ImageUrl" />
-            <ValidationMessage For="()=>EventModel.ImageUrl"/>
+        <div class="mb-3 col-md-6">
+            <label for="eventImageUrl" class="form-label">
+                Event Image URL
+            </label>
+            <InputText
+                type="text"
+                class="form-control"
+                id="eventImageUrl"
+                @bind-value="EventModel.ImageUrl" />
+            <ValidationMessage For="()=>EventModel.ImageUrl" />
         </div>
-        <div class="mb-3">
-            <label for="eventImageAlt" class="form-label">Event Image Alt Text</label>
-            <InputText type="text" class="form-control" id="eventImageAlt" @bind-value="EventModel.ImageAlt" />
-            <ValidationMessage For="()=>EventModel.ImageAlt"/>
+        <div class="mb-3 col-md-6">
+            <label for="eventImageAlt" class="form-label">
+                Event Image Alt Text
+            </label>
+            <InputText
+                type="text"
+                class="form-control"
+                id="eventImageAlt"
+                @bind-value="EventModel.ImageAlt" />
+            <ValidationMessage For="()=>EventModel.ImageAlt" />
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div>
+            <button type="submit" class="btn btn-primary">
+                Submit
+            </button>
+        </div>
     </EditForm>
 </div>
 
-@code {
+@code
+{
     public Event EventModel { get; set; } = new Event { Date = DateTime.Today };
 
     private async Task HandleSave()
