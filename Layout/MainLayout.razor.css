@@ -9,17 +9,15 @@ main {
 }
 
 .sidebar {
-    background-image: linear-gradient(180deg, rgba(5, 39, 103) 0%, #3a0647 70%);
+    z-index: 10;
 }
 
 .top-row {
-    background-color: #80808010;
-    box-shadow: 0 0 10px 5px #00000020;
     justify-content: flex-end;
-    height: 3.5rem;
+    height: var(--top-row-height);
     display: flex;
     align-items: center;
-    backdrop-filter: blur(24px);
+    z-index: 10;
 }
 
 .top-row ::deep a,
@@ -39,14 +37,28 @@ main {
     text-overflow: ellipsis;
 }
 
+.window {
+    position: fixed;
+    border-top-left-radius: 2rem;
+    height: calc(100% - var(--top-row-height));
+    width: calc(100% - var(--sidebar-width));
+    overflow-y: auto;
+}
+
 @media (max-width: 640.98px) {
     .top-row {
         justify-content: space-between;
     }
 
+
     .top-row ::deep a,
     .top-row ::deep .btn-link {
         margin-left: 0;
+    }
+
+    .window {
+        border-top-left-radius: 0;
+        width: 100%;
     }
 }
 
@@ -56,7 +68,7 @@ main {
     }
 
     .sidebar {
-        width: 250px;
+        width: var(--sidebar-width);
         height: 100vh;
         position: sticky;
         top: 0;
@@ -65,7 +77,7 @@ main {
     .top-row {
         position: sticky;
         top: 0;
-        z-index: 1;
+        z-index: 10;
     }
 
     .top-row.auth ::deep a:first-child {
