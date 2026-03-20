@@ -9,8 +9,15 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.1" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer"
+      Version="10.0.1" PrivateAssets="all" />
     <PackageReference Include="TG.Blazor.IndexedDB" Version="1.5.0-preview" />
   </ItemGroup>
+
+  <Target Name="CompileSass" BeforeTargets="Build">
+    <Exec
+      Command="sass Styles/bootstrap-custom.scss wwwroot/css/bootstrap-custom.css --style=compressed" />
+  </Target>
+
 
 </Project>
