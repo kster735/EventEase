@@ -1,29 +1,40 @@
 @namespace EventEase.Components
 @using EventEase.Models
 @using Microsoft.AspNetCore.Components
-
 <div class="card mb-3">
-  <div class="row g-0">
-    <div class="col-md-4 overflow-hidden">
-      <img src="@_imageUrl" class="img-fluid rounded-md-start" alt="@_imageAlt">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <div class="">
-          <h5 class="card-title">@Event?.Name</h5>
+    <div class="row g-0">
+        <div class="col-md-4 overflow-hidden">
+            <img src="@_imageUrl" class="img-fluid rounded-md-start" alt="@_imageAlt">
         </div>
-        <div class="card-text text-truncate">@Event?.Description</div>
-        <div class="card-text"><small class="text-body-secondary">@Event?.Date.ToString("MM/dd/yyyy")</small></div>
-        <div class="text-end">
-          <NavLink href="@($"events/{Event?.Id}")" class="btn btn-link" Match="NavLinkMatch.All">Go to Event
-          </NavLink>
+        <div class="col-md-8">
+            <div class="card-body">
+                <div class="">
+                    <h5 class="card-title">
+                        @Event?.Name
+                    </h5>
+                </div>
+                <div class="card-text text-truncate">
+                    @Event?.Description
+                </div>
+                <div class="card-text">
+                    <small class="text-body-secondary">
+                        @Event?.Date.ToString("MM/dd/yyyy")
+                    </small>
+                </div>
+                <div class="text-end">
+                    <NavLink
+                        href="@($"events/{Event?.Id}")"
+                        class="btn btn-link"
+                        Match="NavLinkMatch.All">
+                        Go to Event
+                    </NavLink>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
-
 <style>
+  
   img.img-fluid {
     width: 100%;
     height: 100%;
@@ -52,48 +63,20 @@
     padding: 0.75rem 1rem;
   }
 
+</style>
 
-  </style
 @code
-  {
-  [Parameter]
-  public
-  Event?
-  Event
-  {
-    get;
-    set;
-  }
-  private
-  string?
-  _imageUrl
-  {
-    get;
-    set;
-  }
-  private
-  string?
-  _imageAlt
-  {
-    get;
-    set;
-  }
-  protected
-  override
-  void
-  OnParametersSet()
-  {
-    _imageUrl
-    =
-    string.IsNullOrEmpty(Event?.ImageUrl)
-    ?
-    "/img/eventDefault.jpg" :
-    Event?.ImageUrl;
-    _imageAlt
-    =
-    string.IsNullOrEmpty(Event?.ImageUrl)
-    ?
-    "Default Event Image" :
-    Event?.ImageAlt;
-  }
+{
+    [Parameter]
+    public Event? Event { get; set; }
+
+    private string? _imageUrl;
+
+    private string? _imageAlt;
+
+    protected override void OnParametersSet()
+    {
+        _imageUrl = string.IsNullOrEmpty(Event?.ImageUrl) ? "/img/eventDefault.jpg" : Event?.ImageUrl;
+        _imageAlt = string.IsNullOrEmpty(Event?.ImageUrl) ? "Default Event Image" : Event?.ImageAlt;
+    }
 }
