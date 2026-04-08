@@ -1,0 +1,61 @@
+@inject IJSRuntime JS
+
+
+<div @ref="_modalRef" class="modal fade" id=@Id tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">@Title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Open"></button>
+      </div>
+      <div class="modal-body">
+        <p>@Body</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#@Id">@CancelText</button>
+        <button type="button" class="btn btn-danger" @onclick="ConfirmAsync">@ConfirmText</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+@code {
+  private ElementReference _modalRef;
+  [Parameter] public EventCallback OnConfirm  {get; set;}
+  [Parameter] public string Id {get; set;} = "one";
+  [Parameter] public string Title {get; set;} = "Modal title";
+
+  [Parameter] public string Body {get; set;} = "Modal body text goes here.";
+
+  [Parameter] public string CancelText {get; set;} = "Cancel";
+  [Parameter] public string ConfirmText {get; set;} = "Delete";
+
+  protected override async Task OnAfterRenderAsync(bool firstRender) {
+    if (firstRender) {
+      await JS.InvokeVoidAsync("moveToBody", _modalRef);
+    }
+
+    Console.WriteLine($"Modal rendered. FirstRender={firstRender}");
+  }
+
+  public async Task ShowAsync()
+  {
+    await JS.InvokeVoidAsync("showModal", _modalRef);
+  }
+
+  public async Task HideAsync()
+  {
+    await JS.InvokeVoidAsync("hideModal", _modalRef);
+  }
+
+  private async Task ConfirmAsync()
+  {
+    if (OnConfirm.HasDelegate) 
+    {
+      await OnConfirm.InvokeAsync();
+    }
+
+    await HideAsync();
+  }
+
+}
