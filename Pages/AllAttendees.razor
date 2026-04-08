@@ -1,0 +1,75 @@
+@page "/attendees"
+@using EventEase.Models
+@using EventEase.Components
+@using Microsoft.AspNetCore.Components
+@inject Services.IAttendeeService attendeeService
+@inject Services.IEventService eventService
+
+<h2>
+    All Attendees
+</h2>
+<div>
+    <table class="table table-striped overflow-scroll">
+        <thead>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th></th>
+        </thead>
+        <tbody class="overflow-scroll">
+        @if (_attendees != null) {
+            @foreach (var attendee in _attendees) {
+                <tr @key=@attendee.Id>
+                    <td> @($"{@_attendees.IndexOf(attendee)+1}")</td>
+                    <td> @attendee.Name </td>
+                    <td> @attendee.Email </td>
+                    <td> 
+                        <button @onclick="() => askDelete(attendee.Id)" class="btn btn-danger text-white">
+                            Unsubscribe
+                        </button> 
+                    </td>
+                   
+                </tr>
+            }
+        } else {
+            <div>No Attendees</div>
+        }
+        </tbody>
+    </table>
+</div>
+<Modal
+    @ref="_deleteModal"
+    Id=@($"modal{_attendeeToDeleteID}")
+    Title="Unsubscribe"
+    Body="Are you sure you want to unsubscribe"
+    CancelText="Cancel"
+    ConfirmText="Delete"
+    OnConfirm="Unsubscribe" 
+/>
+
+@code {
+    private List<AttendeeModel>? _attendees= new List<AttendeeModel>();
+    private int _attendeeToDeleteID = -1;
+
+    private Modal? _deleteModal;    
+
+    protected override async Task OnInitializedAsync() 
+    {
+        _attendees = (await attendeeService.GetAllAttendeesAsync()).ToList();
+        _attendeeToDeleteID = _attendees[1].Id;
+    }
+
+    async private Task Unsubscribe() {
+        await attendeeService.DeleteAttendeeAsync(_attendeeToDeleteID);
+        _attendees?.Remove(_attendees.First(i => i.Id == _attendeeToDeleteID));
+    }
+
+    private async Task askDelete(int id) {
+        _attendeeToDeleteID = id;
+        await Task.Yield(); // ensures render cycle completes
+        if (_deleteModal != null) {
+            await _deleteModal.ShowAsync();
+        }
+    }
+    
+}

@@ -26,7 +26,8 @@ public class AttendeesServiceIndexedDB : IAttendeeService
 
     public async Task<bool> DeleteAttendeeAsync(int attendeeId)
     {
-        throw new NotImplementedException();
+        await _db.DeleteRecord("attendees", attendeeId);
+        return true;
     }
 
     public async Task<IEnumerable<AttendeeModel>> GetAllAttendeesAsync()

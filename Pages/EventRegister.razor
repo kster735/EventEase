@@ -75,6 +75,6 @@
         // Logic to save the eventModel to a database or API would go here
         await attendeeService.CreateAttendeeAsync(Attendee);
         // navigate to the events list page
-        Nav.NavigateTo($"{Nav.BaseUri}events/" + Id);
+        Nav.NavigateTo($"{Nav.BaseUri}events/{Id}/attendees");
     }
 }
