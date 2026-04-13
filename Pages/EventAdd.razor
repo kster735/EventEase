@@ -2,9 +2,9 @@
 @using Models
 @inject Services.IEventService EventService
 @inject NavigationManager Nav
-<h3>Add New Event</h3>
+<h1>Add New Event</h1>
 <div class="container-sm mt-4">
-    <h4>Fill up event details</h4>
+    <h3>Fill up event details</h3>
     <EditForm
         Model="@EventModel"
         OnValidSubmit="HandleSave"
@@ -51,6 +51,7 @@
             <InputTextArea
                 class="form-control"
                 id="eventDescription"
+                rows="6"
                 @bind-value="EventModel.Description" />
             <ValidationMessage For="()=>EventModel.Description" />
         </div>
