@@ -13,9 +13,9 @@
 
 
 
-<h2>
+<h1>
     Attendees of @(State.CurrentEvent?.Name ?? "No name") 
-</h2>
+</h1>
 
 @if (attendees != null)
 {
@@ -61,8 +61,6 @@ else
 @code {
     [Parameter] public int Id { get; set; }
     [Parameter] public string? EventName {get; set;}
-
-    private int index = 1;
 
     List<AttendeeModel> attendees = new();
     protected override async Task OnInitializedAsync()
