@@ -1,0 +1,11 @@
+.before {
+    color: var(--bs-gray);
+}
+
+/* 
+The following overrides default badge styling.
+It needs to be in a scoped css file.
+*/
+.badge {
+    --bs-bg-opacity: 0.15;
+}

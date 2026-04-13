@@ -5,9 +5,9 @@
 @inject Services.IAttendeeService attendeeService
 @inject Services.IEventService eventService
 
-<h2>
+<h1>
     All Attendees
-</h2>
+</h1>
 <div>
     <table class="table table-striped overflow-scroll">
         <thead>
@@ -24,7 +24,7 @@
                     <td> @attendee.Name </td>
                     <td> @attendee.Email </td>
                     <td> 
-                        <button @onclick="() => askDelete(attendee.Id)" class="btn btn-danger text-white">
+                        <button @onclick="() => askDelete(attendee.Id)" class="btn btn-sm btn-danger text-white">
                             Unsubscribe
                         </button> 
                     </td>
@@ -43,7 +43,7 @@
     Title="Unsubscribe"
     Body="Are you sure you want to unsubscribe"
     CancelText="Cancel"
-    ConfirmText="Delete"
+    ConfirmText="Unsubscribe"
     OnConfirm="Unsubscribe" 
 />
 

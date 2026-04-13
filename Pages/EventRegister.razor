@@ -9,7 +9,8 @@
     @inject Services.IEventService eventService
 }
 
-<h3>Register to @(State.CurrentEvent?.Name)</h3>
+<h1>Register to @(State.CurrentEvent?.Name)</h1>
+@if (State.CurrentEvent!=null && !State.CurrentEvent.Canceled && !State.CurrentEvent.IsPast) {
 <div class="mt-4 container-sm" style="max-width: 648px">
     <h4>Fill up attendee details</h4>
     <EditForm
@@ -55,6 +56,9 @@
         </div>
     </EditForm>
 </div>
+} else {
+    <div class="alert alert-danger">Event <i><b>@(State.CurrentEvent?.Name)</b></i> is past or canceled. You cannot register.</div>
+}
 
 @code
 {

@@ -3,7 +3,16 @@
 @using Microsoft.AspNetCore.Components
 <div class="card mb-3">
     <div class="row g-0">
-        <div class="col-md-4 overflow-hidden">
+        <div class="image-container col-md-4 overflow-hidden">
+            @if (Event != null && Event.Canceled) {
+                <div class="badge bg-danger text-light">
+                    Canceled
+                </div>
+            } else if (Event != null && Event.IsPast) {
+                <div class="badge bg-warning text-dark">
+                    Is Past
+                </div>
+            }
             <img src="@_imageUrl" class="img-fluid rounded-md-start" alt="@_imageAlt">
         </div>
         <div class="col-md-8">
@@ -62,6 +71,17 @@
     justify-content: space-between;
     padding: 0.75rem 1rem;
   }
+
+  .image-container {
+    position: relative;
+  }
+
+  .image-container .badge {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    z-index: 100;
+  } 
 
 </style>
 

@@ -1,8 +1,10 @@
 @page "/events/{Id:int}"
 
+@using EventEase.Components
 @using Models
 
 @inject Services.IEventService EventService
+@inject Services.INotificationStoreService NotificationStoreService
 @inject NavigationManager Nav
 @inject EventStateContainer State
 
@@ -21,10 +23,52 @@ else
 {
     <div class="event-detail-container mb-5">
 
-        <img src="@eventItem.ImageUrl" alt="@eventItem.ImageAlt" class="event-detail-image w-100 object-fit-cover rounded-5 my-4" style="max-height: 350px"/>
+        <img src="@_imageUrl" alt="@_imageAlt" class="event-detail-image w-100 object-fit-cover rounded-5 my-4" style="max-height: 350px"/>
 
-        <h2>@eventItem.Name</h2>
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>@eventItem.Name</h2>
+            @if (eventItem.Canceled) {
+                <div class="badge bg-danger text-light d-flex justify-content-between align-items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">
+                        <path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
+                    </svg>
+                    <span>
+                        Canceled
+                    </span>
+                </div>
+            } else if (eventItem.IsPast) {
+                <div class="badge bg-warning text-dark d-flex justify-content-between align-items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-calendar2-x" viewBox="0 0 16 16">
+                        <path d="M6.146 8.146a.5.5 0 0 1 .708 0L8 9.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 10l1.147 1.146a.5.5 0 0 1-.708.708L8 10.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 10 6.146 8.854a.5.5 0 0 1 0-.708"/>
+                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/>
+                        <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                    <span>
+                        Is Past
+                    </span>
+                </div>
+            } else {
+                <button @onclick="AskCancel" class="btn btn-sm rounded-pill btn-danger text-white d-flex justify-content-center align-items-center cancel-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-x" viewBox="0 0 16 16">
+                        <path d="M4 .5a.5.5 0 0 1 .5-.5h.5v1h-1V.5zM11 .5a.5.5 0 0 1 .5-.5h.5v1h-1V.5z"/>
+                        <path d="M3 1h1v1h8V1h1a2 2 0 0 1 2 2v1H1V3a2 2 0 0 1 2-2z"/>
+                        <path d="M1 5v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5H1zm4.854 3.146a.5.5 0 1 1 .707.708L7.207 10l1.354 1.146a.5.5 0 1 1-.707.708L6.5 10.707l-1.354 1.147a.5.5 0 1 1-.707-.708L5.793 10 4.439 8.854a.5.5 0 0 1 .707-.708L6.5 9.293l1.354-1.147z"/>
+                    </svg>
+                    <span class="cancel-text">Cancel Event</span>
+                </button>
 
+                <Modal
+                    @ref="_cancelModal"
+                    Id="cancelModal"
+                    Title=@($"Cancel Event {eventItem.Name}")
+                    Body="Are you sure you want to cancel this event?"
+                    CancelText="Dismiss"
+                    ConfirmText="Cancel Event"
+                    OnConfirm="Cancel" 
+                />
+            }
+        </div>
+    
         <p><strong>Date:</strong> @eventItem.Date.ToString("dddd, dd MMM yyyy")</p>
         <p><strong>Location:</strong> @eventItem.Location</p>
 
@@ -33,10 +77,16 @@ else
             <p>@eventItem.Description</p>
         }
 
-        <NavLink class="btn btn-primary" href=@{
-        String.Format("events/{0}/register", Id)
+
+        @if (eventItem.Canceled || eventItem.IsPast) {
+            <span class="btn disabled">
+                Register
+            </span>
+        } else {
+        <NavLink class="btn btn-primary" href=@{String.Format("events/{0}/register", Id)}>
+            Register
+        </NavLink>
         }
->Register</NavLink>
 
     <button class="btn btn-secondary ms-2" @onclick="GoBack">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
@@ -45,10 +95,7 @@ else
         Back
     </button>
 
-    <NavLink class="btn btn-info ms-2" href=@{
-    String.Format("events/{0}/attendees", Id)
-        }
-    >
+    <NavLink class="btn btn-info ms-2" href=@{String.Format("events/{0}/attendees", Id)}>
         <span>Go to Attendees</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
@@ -63,12 +110,32 @@ else
         margin: 0 auto;
     }
 
+    .cancel-btn .cancel-text {
+        max-width: 0;
+        opacity: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        transition: max-width 0.20s, margin 0.2s, opacity 0.3s ease;
+    }
+
+    /* On hover, expand the text */
+    .cancel-btn:hover .cancel-text,  
+    .cancel-btn:focus-visible .cancel-text
+    {
+        max-width: 100px; /* enough to fit "Cancel Event" */
+        opacity: 1;
+        margin-left: 0.5rem;
+    }
 </style>
 
 @code {
     [Parameter] public int Id { get; set; }
 
     private Event? eventItem;
+    private string? _imageUrl;
+    private string? _imageAlt; 
+
+    private Modal? _cancelModal;
     private bool isLoading = true;
 
     protected override async Task OnInitializedAsync()
@@ -76,10 +143,26 @@ else
         eventItem = await EventService.GetEventByIdAsync(Id);
         State.CurrentEvent = eventItem;
         isLoading = false;
+         _imageUrl = string.IsNullOrEmpty(eventItem?.ImageUrl) ? "/img/eventDefault.jpg" : eventItem?.ImageUrl;
+        _imageAlt = string.IsNullOrEmpty(eventItem?.ImageUrl) ? "Default Event Image" : eventItem?.ImageAlt;
     }
 
     private void GoBack()
     {
         Nav.NavigateTo($"{Nav.BaseUri}events");
+    }
+
+    private async Task Cancel() {
+        if (eventItem != null) {
+            eventItem.Canceled = true;
+            await EventService.UpdateEventAsync(eventItem!);
+            Console.WriteLine($"Try to cancel event {eventItem.Name}");
+        }
+    }
+
+    private async Task AskCancel() {
+       if (_cancelModal != null) {
+            await _cancelModal.ShowAsync();
+        }
     }
 }

@@ -9,8 +9,24 @@ $light: #e0e0d2;
 $white: #ffffff;
 $dark: #1f2d17;
 
+// $border-radius: 1rem;
+// $border-radius-sm: 0.5rem;
+// $border-radius-lg: 0.75rem;
+// $border-radius-xl: 1.5rem;
+// $border-radius-xxl: 2.5rem;
+// $border-radius-2xl: $border-radius-xxl;
+// $border-radius-pill: 50rem;
+
 $border-radius: 1rem;
-$font-size-base: 1.05rem;
+$border-radius-sm: 0.8rem;
+$border-radius-lg: 0.75rem;
+$border-radius-xl: 1.5rem;
+$border-radius-xxl: 2.5rem;
+$border-radius-2xl: $border-radius-xxl;
+$border-radius-pill: 50rem;
+
+
+$font-size-base: 1rem;
 
 // 2. Import Bootstrap's required layers in the correct order
 @import "../wwwroot/lib/bootstrap/scss/functions";

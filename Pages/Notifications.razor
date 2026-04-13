@@ -1,0 +1,72 @@
+@page "/notifications"
+
+@using EventEase.Models
+@inject EventEase.Services.INotificationStoreService notificationStore
+@inject NavigationManager Nav
+
+<div class="container mb-5 mb-md-5">
+    <h2>Notifications</h2>
+
+    @if (_notifications != null) {
+    <ul class="list-group vstack gap-2">
+    @foreach(var n in _notifications) {
+        <li class="list-group-item rounded" @key="@n.Id">
+            <div class="row mb-3">
+                <div class="col">
+                    <span class="badge badge-sm text-bg-info border border-info-subtle text-body">@n.Title</span>
+                </div>
+                <div class="before col text-end">@daysBefore(n) days before</div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    @n.Message
+                    <NavLink class="icon-link icon-link-hover ms-4" href="@($"events/{n.EventId}")" Match="NavLinkMatch.All">
+                        Go to Event
+                        <svg xmlns="http://www.w3.org/2000/svg" class="bi" viewBox="0 0 16 16" aria-hidden="true">
+                            <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                        </svg>
+                    </NavLink>
+                </div>
+                <div class="col-auto">
+                    <div class="form-check text-primary">
+                        <label class="form-check-label" for="@($"read{n.Id}")">
+                            Is Read
+                        </label>
+                        <input @onchange="() => MarkAsRead(n)" class="form-check-input" type="checkbox" checked="@n.Read" id="@($"read{n.Id}")">
+                    </div>
+                  </div>
+            </div>
+        </li>
+    }
+    </ul>
+    } else {
+        <div>
+            There are no Notifications yet!
+        </div>
+    }
+
+</div>
+
+@code {
+    private List<Notification>? _notifications;
+
+    
+    protected override async Task OnInitializedAsync()
+    {
+        _notifications = (await notificationStore.GetAllNotificationsAsync())
+            .OrderByDescending(n => n.Timestamp)
+            .ToList();
+    }
+
+    private int daysBefore(Notification notification) {
+        var dif = DateTime.Now.Date - notification.Timestamp.Date; 
+        return dif.Days;
+    }
+
+    private async Task MarkAsRead(Notification n) {
+        await notificationStore.MarkAsReadAsync(n.Id);
+        n.Read = !n.Read;
+    }
+
+}
+

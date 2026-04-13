@@ -25,10 +25,14 @@ public class Event
     [UrlOrNullorEmpty]
     public string? ImageUrl { get; set; }
 
+
     [AltTextRequiredIfImageUrl]
     public string? ImageAlt { get; set; }
-    public List<AttendeeModel> Attendees { get; set; } = new List<AttendeeModel>();
 
+    public bool NotificationIsRead { get; set; } = false;
+    public List<AttendeeModel> Attendees { get; set; } = new List<AttendeeModel>();
+    public bool Canceled { get; set; } = false;
+    public bool IsPast => Date < DateTime.Now;
     public class FutureDateAttribute : ValidationAttribute
     {
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)

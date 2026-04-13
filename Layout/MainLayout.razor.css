@@ -45,19 +45,36 @@ main {
     overflow-y: auto;
 }
 
+.counter-badge {
+    position: absolute;
+    display: grid;
+    top: 0;
+    right: -8px;
+    width: 16px;
+    height: 16px;
+    border-radius: 100px;
+    font-size: xx-small !important;
+    font-weight: 900;
+
+    &>span.counter-badge__text {
+        place-content: center;
+    }
+}
+
 @media (max-width: 640.98px) {
     .top-row {
-        justify-content: space-between;
+        height: max-content;
     }
 
 
     .top-row ::deep a,
     .top-row ::deep .btn-link {
-        margin-left: 0;
+        margin-left: 0.5remm;
     }
 
     .window {
         border-top-left-radius: 0;
+        height: calc(100% - 2*var(--top-row-height) - 32px);
         width: 100%;
     }
 }
@@ -91,4 +108,37 @@ main {
         padding-left: 2rem !important;
         padding-right: 1.5rem !important;
     }
+}
+
+
+/* Bell animation */
+@keyframes bell-swing {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    20% {
+        transform: rotate(-15deg);
+    }
+
+    40% {
+        transform: rotate(10deg);
+    }
+
+    60% {
+        transform: rotate(-10deg);
+    }
+
+    80% {
+        transform: rotate(5deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.bell-animate {
+    animation: bell-swing 0.8s ease-in-out;
+    transform-origin: top center;
 }
