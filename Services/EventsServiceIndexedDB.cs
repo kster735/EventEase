@@ -42,7 +42,12 @@ public class EventsServiceIndexedDb : IEventService
 
     public Task<Event> UpdateEventAsync(Event updatedEvent)
     {
-        throw new NotImplementedException();
+        _db.UpdateRecord(new StoreRecord<Event>
+        {
+            Storename = "events",
+            Data = updatedEvent,
+        });
+        return Task.FromResult(updatedEvent);
     }
 
 }
