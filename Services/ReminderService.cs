@@ -1,6 +1,5 @@
 namespace EventEase.Services;
 
-using EventEase.Layout;
 using EventEase.Models;
 
 public class ReminderService : IAsyncDisposable
